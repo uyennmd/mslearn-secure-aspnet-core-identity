@@ -13,6 +13,10 @@ builder.Services.AddDefaultIdentity<RazorPagesPizzaUser>(options => options.Sign
 builder.Services.AddRazorPages();
 builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddAuthorization(options =>
+    options.AddPolicy("Admin", policy =>
+        policy.RequireAuthenticatedUser()
+            .RequireClaim("IsAdmin", bool.TrueString)));
 
 var app = builder.Build();
 

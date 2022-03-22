@@ -11,6 +11,9 @@ namespace RazorPagesPizza.Pages
     {
         public List<Pizza> pizzas = new();
 
+        public bool IsAdmin =>
+            HttpContext.User.HasClaim("IsAdmin", bool.TrueString);
+
         [BindProperty]
         public Pizza NewPizza { get; set; } = new();
 
@@ -19,8 +22,14 @@ namespace RazorPagesPizza.Pages
             pizzas = PizzaService.GetAll();
         }
 
+
         public IActionResult OnPost()
         {
+            if (!IsAdmin)
+            {
+                return Forbid();
+            }
+
             if (!ModelState.IsValid)
             {
                 return Page();
@@ -31,6 +40,11 @@ namespace RazorPagesPizza.Pages
 
         public IActionResult OnPostDelete(int id)
         {
+            if (!IsAdmin)
+            {
+                return Forbid();
+            }
+
             PizzaService.Delete(id);
             return RedirectToAction("Get");
         }
