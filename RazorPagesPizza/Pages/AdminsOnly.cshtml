@@ -1,8 +1,8 @@
-﻿@page
-@model RazorPagesPizza.Pages.AdminsOnlyModel
+@page
+@model AdminsOnlyModel
 @{
+    ViewData["Title"] = "Super Secret Admin Page!";
 }
+<h1>@ViewData["Title"]</h1>
 
-<div class="text-center">
-    <h1 class="display-4">Exclusive Admin Page</h1>
-</div>
+<p>If you're not an admin, you shouldn't be seeing this page!!!</p>

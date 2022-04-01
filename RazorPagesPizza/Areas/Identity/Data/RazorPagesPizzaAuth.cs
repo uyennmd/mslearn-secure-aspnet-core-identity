@@ -5,9 +5,9 @@ using RazorPagesPizza.Areas.Identity.Data;
 
 namespace RazorPagesPizza.Areas.Identity.Data;
 
-public class RazorPagesPizzaIdentityDbContext : IdentityDbContext<RazorPagesPizzaUser>
+public class RazorPagesPizzaAuth : IdentityDbContext<RazorPagesPizzaUser>
 {
-    public RazorPagesPizzaIdentityDbContext(DbContextOptions<RazorPagesPizzaIdentityDbContext> options)
+    public RazorPagesPizzaAuth(DbContextOptions<RazorPagesPizzaAuth> options)
         : base(options)
     {
     }

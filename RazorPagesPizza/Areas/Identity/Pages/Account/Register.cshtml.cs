@@ -127,7 +127,7 @@ namespace RazorPagesPizza.Areas.Identity.Pages.Account
 
                 user.FirstName = Input.FirstName;
                 user.LastName = Input.LastName;
-                
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
@@ -147,6 +147,7 @@ namespace RazorPagesPizza.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by visiting the following URL:\r\n\r\n{callbackUrl}");
+
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {

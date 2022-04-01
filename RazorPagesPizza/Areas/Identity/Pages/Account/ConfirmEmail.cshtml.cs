@@ -4,7 +4,6 @@
 
 using System;
 using System.Linq;
-using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -13,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using RazorPagesPizza.Areas.Identity.Data;
+using System.Security.Claims;
 
 namespace RazorPagesPizza.Areas.Identity.Pages.Account
 {
@@ -54,7 +54,7 @@ namespace RazorPagesPizza.Areas.Identity.Pages.Account
             var adminEmail = Configuration["AdminEmail"] ?? string.Empty;
             if(result.Succeeded)
             {
-                var isAdmin = user.Email == adminEmail;
+                var isAdmin = string.Compare(user.Email, adminEmail, true) == 0 ? true : false;
                 await _userManager.AddClaimAsync(user, 
                     new Claim("IsAdmin", isAdmin.ToString()));
             }

@@ -1,14 +1,21 @@
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Authorization;
 
-namespace RazorPagesPizza.Pages
+namespace RazorPagesPizza.Pages;
+
+//[Authorize(Policy = "Admin")]
+public class AdminsOnlyModel : PageModel
 {
-    [Authorize(Policy = "Admin")]
-    public class AdminsOnlyModel : PageModel
+    private readonly ILogger<AdminsOnlyModel> _logger;
+
+    public AdminsOnlyModel(ILogger<AdminsOnlyModel> logger)
     {
-        public void OnGet()
-        {
-        }
+        _logger = logger;
+    }
+
+    public void OnGet()
+    {
     }
 }
+

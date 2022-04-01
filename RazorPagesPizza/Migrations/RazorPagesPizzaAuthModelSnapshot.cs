@@ -10,8 +10,8 @@ using RazorPagesPizza.Areas.Identity.Data;
 
 namespace RazorPagesPizza.Migrations
 {
-    [DbContext(typeof(RazorPagesPizzaIdentityDbContext))]
-    partial class RazorPagesPizzaIdentityDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(RazorPagesPizzaAuth))]
+    partial class RazorPagesPizzaAuthModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {

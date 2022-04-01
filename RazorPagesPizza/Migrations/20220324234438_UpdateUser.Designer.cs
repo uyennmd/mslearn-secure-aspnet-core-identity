@@ -11,8 +11,8 @@ using RazorPagesPizza.Areas.Identity.Data;
 
 namespace RazorPagesPizza.Migrations
 {
-    [DbContext(typeof(RazorPagesPizzaIdentityDbContext))]
-    [Migration("20220311004408_UpdateUser")]
+    [DbContext(typeof(RazorPagesPizzaAuth))]
+    [Migration("20220324234438_UpdateUser")]
     partial class UpdateUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

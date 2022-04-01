@@ -1,18 +1,21 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using QRCoder;
 using RazorPagesPizza.Areas.Identity.Data;
-using RazorPagesPizza.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using RazorPagesPizza.Services;
+using QRCoder;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("RazorPagesPizzaIdentityDbContextConnection");
-builder.Services.AddDbContext<RazorPagesPizzaIdentityDbContext>(options => options.UseSqlServer(connectionString)); 
+var connectionString = builder.Configuration.GetConnectionString("RazorPagesPizzaAuthConnection"); 
+builder.Services.AddDbContext<RazorPagesPizzaAuth>(options => options.UseSqlServer(connectionString)); 
 builder.Services.AddDefaultIdentity<RazorPagesPizzaUser>(options => options.SignIn.RequireConfirmedAccount = true)
-      .AddEntityFrameworkStores<RazorPagesPizzaIdentityDbContext>();
+      .AddEntityFrameworkStores<RazorPagesPizzaAuth>();
+
 // Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
+builder.Services.AddRazorPages(options =>
+    options.Conventions.AuthorizePage("/AdminsOnly", "Admin"));
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+builder.Services.AddSingleton(new QRCodeService(new QRCodeGenerator()));
 builder.Services.AddAuthorization(options =>
     options.AddPolicy("Admin", policy =>
         policy.RequireAuthenticatedUser()
